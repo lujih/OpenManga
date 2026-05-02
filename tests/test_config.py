@@ -7,8 +7,11 @@ def test_load_config_resolves_env_vars(tmp_path):
     config_file = tmp_path / "config.yaml"
     config_file.write_text("image_generation:\n  api_key: \"${TEST_CONFIG_KEY}\"\n")
     os.environ["TEST_CONFIG_KEY"] = "secret123"
-    config = load_config(str(config_file))
-    assert config["image_generation"]["api_key"] == "secret123"
+    try:
+        config = load_config(str(config_file))
+        assert config["image_generation"]["api_key"] == "secret123"
+    finally:
+        del os.environ["TEST_CONFIG_KEY"]
 
 
 def test_load_config_missing_file():
