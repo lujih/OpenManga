@@ -1,0 +1,19 @@
+image_generation:
+  provider: "openai"
+  model: "gpt-image-2"
+  api_key: "${OPENAI_API_KEY}"
+
+video_generation:
+  provider: "seedance"
+  model: "seedance-v1"
+  api_key: "${SEEDANCE_API_KEY}"
+
+tts:
+  provider: "elevenlabs"
+  model: "eleven_turbo_v2"
+  api_key: "${ELEVENLABS_API_KEY}"
+
+llm:
+  provider: "anthropic"
+  model: "claude-sonnet-4-20250514"
+  api_key: "${ANTHROPIC_API_KEY}"
