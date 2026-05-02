@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "title": "测试短片",
+    "style": "写实, 冷色调",
+    "total_duration_est": 20
+  },
+  "characters": {
+    "主角": {
+      "appearance": "年轻男子，黑色短发，穿着灰色外套",
+      "voice_id": "male_01"
+    }
+  },
+  "shots": [
+    {
+      "shot_id": 1,
+      "character": "主角",
+      "dialogue": "你好。",
+      "emotion": "平静",
+      "scene_desc": "安静的室内，窗边，自然光从侧面照入",
+      "camera": "中景，平视",
+      "motion": null,
+      "ambient": null,
+      "duration_sec": 3,
+      "transition": "硬切"
+    },
+    {
+      "shot_id": 2,
+      "character": null,
+      "dialogue": null,
+      "emotion": null,
+      "scene_desc": "窗外街道，黄昏时分",
+      "camera": "远景",
+      "motion": null,
+      "ambient": null,
+      "duration_sec": 2,
+      "transition": "硬切"
+    }
+  ]
+}
