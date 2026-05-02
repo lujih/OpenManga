@@ -1,0 +1,23 @@
+[project]
+name = "openmanga"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.0",
+    "pyyaml>=6.0",
+    "anthropic>=0.30.0",
+    "openai>=1.0.0",
+    "elevenlabs>=1.0.0",
+    "moviepy>=2.0.0",
+    "openai-whisper>=20231117",
+]
+
+[project.scripts]
+openmanga-screenwriter = "pipeline.screenwriter:cli"
+openmanga-illustrator = "pipeline.illustrator:cli"
+openmanga-voice = "pipeline.voice:cli"
+openmanga-editor = "pipeline.editor:cli"
+openmanga-supervisor = "pipeline.supervisor:cli"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-mock>=3.0"]
