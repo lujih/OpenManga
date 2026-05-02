@@ -1,0 +1,11 @@
+shot_id: 1
+character: "主角"
+character_ref: "assets/characters/主角/standard.png"
+dialogue: "你好。"
+emotion: "平静"
+scene_desc: "安静的室内，窗边，自然光从侧面照入"
+camera: "中景，平视"
+motion: null
+ambient: null
+duration_sec: 3
+style: "写实, 冷色调"
