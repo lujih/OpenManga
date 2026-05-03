@@ -132,8 +132,9 @@ def run(project, config, from_step):
 @cli.command()
 @click.option("--project", required=True)
 @click.option("--shot-id", required=True, type=int)
-def retake(project, shot_id):
-    project_dir = os.path.join("outputs", project)
+@click.option("--config", default="config.yaml")
+def retake(project, shot_id, config):
+    project_dir = project
     shot_dir = os.path.join(project_dir, f"shot_{shot_id:02d}")
 
     if not os.path.exists(shot_dir):
@@ -150,7 +151,54 @@ def retake(project, shot_id):
                     os.remove(filepath)
             os.remove(mp)
 
-    click.echo(f"Cleared manifests and outputs for shot_{shot_id:02d}. Run 'run' to regenerate.")
+    click.echo(f"Cleared outputs for shot_{shot_id:02d}. Regenerating...")
+
+    screenplay_path = os.path.join(project_dir, "screenplay.json")
+    if not os.path.exists(screenplay_path):
+        click.echo("Error: screenplay.json not found.")
+        return
+
+    with open(screenplay_path) as f:
+        screenplay = json.load(f)
+
+    global_style = screenplay["meta"]["style"]
+    shot = next((s for s in screenplay["shots"] if s["shot_id"] == shot_id), None)
+    if shot is None:
+        click.echo(f"Error: shot {shot_id} not found in screenplay.")
+        return
+
+    brief_path = prepare_shot(project_dir, shot, global_style)
+
+    for step in PHASE1_STEPS:
+        if step == "screenplay":
+            continue
+        click.echo(f"  shot_{shot_id:02d}/{step}: running...")
+
+        if step == "illustrate":
+            subprocess.run([
+                _python(), "pipeline/illustrator.py", "generate-shot",
+                "--input-file", brief_path, "--config", config,
+            ], check=False)
+            if manifest_exists(project_dir, shot_id, "illustrate"):
+                update_brief_with_keyframe(brief_path, project_dir, shot_id)
+
+        elif step == "voice":
+            subprocess.run([
+                _python(), "pipeline/voice.py", "generate",
+                "--input-file", brief_path, "--config", config,
+            ], check=False)
+
+        elif step == "edit":
+            final_path = os.path.join(shot_dir, f"shot_{shot_id:02d}_final.mp4")
+            subprocess.run([
+                _python(), "pipeline/editor.py", "generate",
+                "--input-file", brief_path,
+                "--screenplay", screenplay_path,
+                "--output", final_path,
+                "--config", config,
+            ], check=False)
+
+    click.echo(f"shot_{shot_id:02d} regenerated.")
 
 
 @cli.command()
