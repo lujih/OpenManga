@@ -73,7 +73,7 @@ pages/
 - **状态矩阵**：
   - 行 = shot，列 = illustrate / voice / edit
   - 状态标记：✅ OK | ⏳ PENDING | ❌ FAIL（悬停显示 `error.message`）| — SKIP
-  - 数据源：`supervisor.py status` 的输出（解析为表格）
+  - 数据源：`supervisor.py status` 输出的文本表格，Web 端解析各行状态标记
 - **每行操作**："重拍此镜"按钮 → 调 `supervisor.py retake --shot-id N`（清理+自动重生成），轮询 manifest 更新进度
 - **右侧预览面板**：选中镜头 → 显示关键帧缩略图（`shot_NN_keyframe.png`）+ 配音播放器（`shot_NN_voice.wav`）
 - **底部**：整体进度条 + 实时日志区（`subprocess` stdout 流）
