@@ -2,6 +2,7 @@ import json
 import os
 import click
 import anthropic
+import openai
 from datetime import datetime, timezone
 from pipeline.config import load_config
 from pipeline.manifest import write_manifest
@@ -57,6 +58,21 @@ Generate the screenplay JSON following this exact structure:
 }}"""
 
 
+def _create_llm_client(cfg):
+    provider = cfg.get("provider", "")
+    api_base = cfg.get("api_base") or None
+    if provider == "anthropic":
+        return "anthropic", anthropic.Anthropic(
+            api_key=cfg["api_key"],
+            base_url=api_base,
+        )
+    else:
+        return "openai", openai.OpenAI(
+            api_key=cfg["api_key"],
+            base_url=api_base,
+        )
+
+
 @click.group()
 def cli():
     pass
@@ -69,23 +85,39 @@ def cli():
 @click.option("--config", default="config.yaml", help="Path to config file")
 def generate(idea, style, output, config):
     cfg = load_config(config)
-    client = anthropic.Anthropic(api_key=cfg["llm"]["api_key"])
+    llm_cfg = cfg["llm"]
+    params = llm_cfg.get("params", {})
+    max_tokens = params.get("max_tokens", 4096)
+
+    provider_kind, client = _create_llm_client(llm_cfg)
 
     user_prompt = USER_PROMPT_TEMPLATE.format(idea=idea, style=style)
 
     started_at = datetime.now(timezone.utc)
 
-    message = client.messages.create(
-        model=cfg["llm"]["model"],
-        max_tokens=4096,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": user_prompt}],
-    )
+    if provider_kind == "anthropic":
+        message = client.messages.create(
+            model=llm_cfg["model"],
+            max_tokens=max_tokens,
+            system=SYSTEM_PROMPT,
+            messages=[{"role": "user", "content": user_prompt}],
+        )
+        result_text = message.content[0].text
+    else:
+        message = client.chat.completions.create(
+            model=llm_cfg["model"],
+            max_tokens=max_tokens,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt},
+            ],
+        )
+        result_text = message.choices[0].message.content
 
     finished_at = datetime.now(timezone.utc)
     duration = (finished_at - started_at).total_seconds()
 
-    screenplay = json.loads(message.content[0].text)
+    screenplay = json.loads(result_text)
 
     os.makedirs(os.path.dirname(output), exist_ok=True)
     with open(output, "w") as f:
@@ -96,7 +128,7 @@ def generate(idea, style, output, config):
         status="success",
         input={"idea": idea, "style": style},
         output={"screenplay": output},
-        model={"provider": cfg["llm"]["provider"], "model": cfg["llm"]["model"]},
+        model={"provider": llm_cfg["provider"], "model": llm_cfg["model"]},
         timing={
             "started_at": started_at.isoformat(),
             "finished_at": finished_at.isoformat(),
