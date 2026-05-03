@@ -1,19 +1,40 @@
 image_generation:
-  provider: "openai"
-  model: "gpt-image-2"
-  api_key: "${OPENAI_API_KEY}"
+  provider: openai
+  model: gpt-image-2
+  api_key: ${OPENAI_API_KEY}
+  api_base: ""
+  params:
+    n: 1
+    size: "1024x1024"
 
 video_generation:
-  provider: "seedance"
-  model: "seedance-v1"
-  api_key: "${SEEDANCE_API_KEY}"
+  provider: seedance
+  model: seedance-v1
+  api_key: ${SEEDANCE_API_KEY}
+  api_base: ""
+  params: {}
 
 tts:
-  provider: "elevenlabs"
-  model: "eleven_turbo_v2"
-  api_key: "${ELEVENLABS_API_KEY}"
+  provider: elevenlabs
+  model: eleven_turbo_v2
+  api_key: ${ELEVENLABS_API_KEY}
+  api_base: ""
+  params:
+    voice_id: "JBFqnCBsd6RMkjVDRZzb"
+    output_format: "mp3_44100_128"
 
 llm:
-  provider: "anthropic"
-  model: "claude-sonnet-4-20250514"
-  api_key: "${ANTHROPIC_API_KEY}"
+  provider: anthropic
+  model: claude-sonnet-4-20250514
+  api_key: ${ANTHROPIC_API_KEY}
+  api_base: ""
+  params:
+    max_tokens: 4096
+
+editor:
+  params:
+    video_size: [1024, 1024]
+    fps: 24
+    codec: "libx264"
+    audio_codec: "aac"
+    font_size: 48
