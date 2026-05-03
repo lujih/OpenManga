@@ -28,7 +28,13 @@ def cli():
 @click.option("--config", default="config.yaml")
 def generate_character(name, appearance, angles, output, config):
     cfg = load_config(config)
-    client = OpenAI(api_key=cfg["image_generation"]["api_key"])
+    img_cfg = cfg["image_generation"]
+    params = img_cfg.get("params", {})
+    api_base = img_cfg.get("api_base") or None
+    client = OpenAI(
+        api_key=img_cfg["api_key"],
+        base_url=api_base,
+    )
     angle_list = [a.strip() for a in angles.split(",")]
 
     os.makedirs(output, exist_ok=True)
@@ -39,10 +45,10 @@ def generate_character(name, appearance, angles, output, config):
         angle_desc = ANGLE_PROMPTS.get(angle, f"{angle} view")
         prompt = f"{appearance}, {angle_desc}, high quality"
         client.images.generate(
-            model=cfg["image_generation"]["model"],
+            model=img_cfg["model"],
             prompt=prompt,
-            n=1,
-            size="1024x1024",
+            n=params.get("n", 1),
+            size=params.get("size", "1024x1024"),
         )
         image_path = os.path.join(output, f"{angle}.png")
         image_paths[angle] = image_path
@@ -74,11 +80,17 @@ def generate_character(name, appearance, angles, output, config):
 @click.option("--config", default="config.yaml")
 def generate_shot(input_file, config):
     cfg = load_config(config)
+    img_cfg = cfg["image_generation"]
+    params = img_cfg.get("params", {})
+    api_base = img_cfg.get("api_base") or None
 
     with open(input_file) as f:
         brief = yaml.safe_load(f)
 
-    client = OpenAI(api_key=cfg["image_generation"]["api_key"])
+    client = OpenAI(
+        api_key=img_cfg["api_key"],
+        base_url=api_base,
+    )
 
     prompt_parts = []
     if brief.get("character_ref"):
@@ -99,10 +111,10 @@ def generate_shot(input_file, config):
     started_at = datetime.now(timezone.utc)
 
     client.images.generate(
-        model=cfg["image_generation"]["model"],
+        model=img_cfg["model"],
         prompt=prompt,
-        n=1,
-        size="1024x1024",
+        n=params.get("n", 1),
+        size=params.get("size", "1024x1024"),
     )
 
     finished_at = datetime.now(timezone.utc)
