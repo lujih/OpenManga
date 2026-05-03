@@ -20,7 +20,14 @@ def cli():
 @click.option("--output", required=True)
 @click.option("--config", default="config.yaml")
 def generate(input_file, screenplay, output, config):
-    load_config(config)
+    cfg = load_config(config)
+
+    editor_params = cfg.get("editor", {}).get("params", {})
+    video_size = tuple(editor_params.get("video_size", [1024, 1024]))
+    fps_val = editor_params.get("fps", 24)
+    codec_val = editor_params.get("codec", "libx264")
+    audio_codec_val = editor_params.get("audio_codec", "aac")
+    font_size_val = editor_params.get("font_size", 48)
 
     with open(input_file) as f:
         brief = yaml.safe_load(f)
@@ -62,15 +69,15 @@ def generate(input_file, screenplay, output, config):
         if segments:
             txt = TextClip(
                 text=segments[0]["text"].strip(),
-                font_size=48, color="white",
+                font_size=font_size_val, color="white",
                 font="Arial", stroke_color="black", stroke_width=2,
             )
             txt = txt.with_position(("center", "center")).with_duration(duration)
             clips.append(txt)
 
     if clips:
-        final = CompositeVideoClip(clips, size=(1024, 1024))
-        final.write_videofile(output, fps=24, codec="libx264", audio_codec="aac")
+        final = CompositeVideoClip(clips, size=video_size)
+        final.write_videofile(output, fps=fps_val, codec=codec_val, audio_codec=audio_codec_val)
     else:
         with open(output, "w") as f:
             f.write("placeholder")
