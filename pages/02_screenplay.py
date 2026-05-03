@@ -48,14 +48,14 @@ if os.path.exists(screenplay_path):
                 with cols[i % 3]:
                     with st.container(border=True):
                         st.markdown(f"**{name}**")
-                        st.caption(f"voice: {info.get('voice_id', 'N/A')}")
+                        st.caption(f"配音: {info.get('voice_id', '无')}")
                         st.text(info.get("appearance", ""))
 
     with tab2:
         shots = screenplay.get("shots", [])
         st.caption(f"共 {len(shots)} 个镜头，预估时长 {screenplay['meta'].get('total_duration_est', 0)} 秒")
         for shot in shots:
-            with st.expander(f"Shot {shot['shot_id']} — {shot.get('character') or '环境'} — {shot.get('duration_sec', 0)}s"):
+            with st.expander(f"镜 {shot['shot_id']} — {shot.get('character') or '环境'} — {shot.get('duration_sec', 0)}秒"):
                 c1, c2 = st.columns(2)
                 with c1:
                     st.text_input("角色", shot.get("character", ""), key=f"ch_{shot['shot_id']}")

@@ -52,7 +52,7 @@ if os.path.exists(lock_path):
 st.divider()
 
 header_cols = st.columns([1] + [1] * (len(PHASE1_STEPS) - 1))
-header_cols[0].markdown("**Shot**")
+header_cols[0].markdown("**镜头**")
 for i, step in enumerate(PHASE1_STEPS[1:], 1):
     header_cols[i].markdown(f"**{step}**")
 
@@ -62,24 +62,24 @@ selected_shot = st.session_state.get("selected_shot", None)
 for shot in shots:
     shot_id = shot["shot_id"]
     cols = st.columns([1] + [1] * (len(PHASE1_STEPS) - 1))
-    cols[0].write(f"Shot {shot_id:02d}")
+    cols[0].write(f"镜 {shot_id:02d}")
 
     for i, step in enumerate(PHASE1_STEPS[1:], 1):
         status = get_manifest_status(project_dir, shot_id, step)
         if status == "success":
-            cols[i].success("OK")
+            cols[i].success("完成")
         elif status == "skipped":
-            cols[i].info("SKIP")
+            cols[i].info("跳过")
         elif status == "failed":
             mf = manifest_path(project_dir, shot_id, step)
             if os.path.exists(mf):
                 with open(mf) as mf_f:
                     err = yaml.safe_load(mf_f).get("error", {})
-                cols[i].error(f"FAIL\n{err.get('message', 'unknown')[:30]}")
+                cols[i].error(f"失败\n{err.get('message', '?')[:30]}")
             else:
-                cols[i].error("FAIL")
+                cols[i].error("失败")
         else:
-            cols[i].warning("-")
+            cols[i].warning("待处理")
 
     c1, c2 = st.columns([1, 3])
     with c1:
