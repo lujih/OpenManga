@@ -10,6 +10,7 @@ dependencies = [
     "elevenlabs>=1.0.0",
     "moviepy>=2.0.0",
     "openai-whisper>=20231117",
+    "streamlit>=1.30",
 ]
 
 [project.scripts]
