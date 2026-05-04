@@ -33,31 +33,35 @@
 ## 🚀 快速开始
 
 ```bash
-# 1. 安装
-python scripts/install.py
+# 1. 克隆仓库
+git clone https://github.com/lujih/OpenManga.git
+cd OpenManga
 
-# 2. 配置 API Key
+# 2. 安装
+python install.py
+
+# 3. 配置 API Key
 export OPENAI_API_KEY="sk-..."
 export ANTHROPIC_API_KEY="sk-..."
 export ELEVENLABS_API_KEY="..."
 
-# 3. 生成剧本
-python pipeline/screenwriter.py generate \
+# 4. 生成剧本
+python OpenManga/pipeline/screenwriter.py generate \
     --idea "雨夜天台，最后一场告别" \
     --style "赛博朋克, 电影感" \
     --output outputs/my_project/screenplay.json
 
-# 4. 一键生成完整视频
-python pipeline/supervisor.py run --project my_project
+# 5. 一键生成完整视频
+python OpenManga/pipeline/supervisor.py run --project my_project
 
-# 5. 查看状态
-python pipeline/supervisor.py status --project my_project
+# 6. 查看状态
+python OpenManga/pipeline/supervisor.py status --project my_project
 ```
 
 ### Web 控制台
 
 ```bash
-streamlit run app.py
+streamlit run OpenManga/app.py
 # → http://localhost:8501
 ```
 
