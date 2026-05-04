@@ -17,7 +17,7 @@ def test_dashboard_requires_project():
 
 
 def test_dashboard_shows_screenplay_warning(tmp_path):
-    project_dir = os.path.join("outputs", "test_proj")
+    project_dir = os.path.join("OpenManga", "outputs", "test_proj")
     screenplay_path = os.path.join(project_dir, "screenplay.json")
     if os.path.exists(screenplay_path):
         os.remove(screenplay_path)
@@ -33,7 +33,7 @@ def test_dashboard_shows_screenplay_warning(tmp_path):
 
 
 def test_dashboard_loads_with_screenplay(tmp_path):
-    project_dir = os.path.join("outputs", "test_proj")
+    project_dir = os.path.join("OpenManga", "outputs", "test_proj")
     os.makedirs(os.path.join(project_dir, "shot_01"), exist_ok=True)
     screenplay = {
         "meta": {"title": "Test", "style": "写实", "total_duration_est": 10},

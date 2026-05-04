@@ -28,7 +28,7 @@ def test_prepare_shot_creates_shot_brief(tmp_path):
 
 def test_prepare_shot_sets_character_ref_when_image_exists(tmp_path):
     project_dir = str(tmp_path / "my_project")
-    char_dir = os.path.join("assets", "characters", "配角")
+    char_dir = os.path.join("OpenManga", "assets", "characters", "配角")
     os.makedirs(char_dir, exist_ok=True)
     with open(os.path.join(char_dir, "front.png"), "w") as f:
         f.write("fake")
@@ -44,7 +44,7 @@ def test_prepare_shot_sets_character_ref_when_image_exists(tmp_path):
     brief_path = prepare_shot(project_dir, shot, "写实")
     with open(brief_path) as f:
         brief = yaml.safe_load(f)
-    assert brief["character_ref"] == os.path.join("assets", "characters", "配角", "front.png")
+    assert brief["character_ref"] == os.path.join("OpenManga", "assets", "characters", "配角", "front.png")
 
 
 def test_status_shows_manifest_states(tmp_path, sample_config_path):

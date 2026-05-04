@@ -15,9 +15,9 @@ For each shot, call:
 
 ```bash
 python OpenManga/pipeline/editor.py generate \
-    --input-file outputs/<project>/shot_<NN>/shot_brief.yaml \
-    --screenplay outputs/<project>/screenplay.json \
-    --output outputs/<project>/shot_<NN>/shot_<NN>_final.mp4 \
+    --input-file OpenManga/outputs/<project>/shot_<NN>/shot_brief.yaml \
+    --screenplay OpenManga/outputs/<project>/screenplay.json \
+    --output OpenManga/outputs/<project>/shot_<NN>/shot_<NN>_final.mp4 \
     --config config.yaml
 ```
 

@@ -14,7 +14,7 @@ if not st.session_state.project:
     st.stop()
 
 project = st.session_state.project
-project_dir = os.path.join("outputs", project)
+project_dir = os.path.join("OpenManga", "outputs", project)
 screenplay_path = os.path.join(project_dir, "screenplay.json")
 lock_path = os.path.join(project_dir, ".lock_running")
 

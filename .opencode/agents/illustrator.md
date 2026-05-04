@@ -17,7 +17,7 @@ Before generating shots, ensure all characters have reference images:
 python OpenManga/pipeline/illustrator.py generate-character \
     --name "<character name>" \
     --appearance "<physical description>" \
-    --output assets/characters/<name>/ \
+    --output OpenManga/assets/characters/<name>/ \
     --config config.yaml
 ```
 
@@ -27,7 +27,7 @@ For each shot, call:
 
 ```bash
 python OpenManga/pipeline/illustrator.py generate-shot \
-    --input-file outputs/<project>/shot_<NN>/shot_brief.yaml \
+    --input-file OpenManga/outputs/<project>/shot_<NN>/shot_brief.yaml \
     --config config.yaml
 ```
 

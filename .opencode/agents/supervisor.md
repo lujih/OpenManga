@@ -42,7 +42,7 @@ python OpenManga/pipeline/supervisor.py retake --project <project_name> --shot-i
 
 ## Workflow
 
-1. Ensure `screenplay.json` exists in `outputs/<project>/`
+1. Ensure `screenplay.json` exists in `OpenManga/outputs/<project>/`
 2. Run `run` to process all shots through illustrate → voice → edit
 3. Check `status` to verify all steps are OK
 4. If any step fails, use `retake` to auto-regenerate

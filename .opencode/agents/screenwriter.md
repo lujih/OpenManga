@@ -18,10 +18,10 @@ You are the Screenwriter agent for OpenManga. Your job is to turn a creative ide
 python OpenManga/pipeline/screenwriter.py generate \
     --idea "<the idea>" \
     --style "<style description>" \
-    --output outputs/<project_name>/screenplay.json \
+    --output OpenManga/outputs/<project_name>/screenplay.json \
     --config config.yaml
 ```
 
-3. Verify `outputs/<project_name>/screenplay.json` was created.
+3. Verify `OpenManga/outputs/<project_name>/screenplay.json` was created.
 4. Read the JSON and confirm it has valid `meta`, `characters`, and `shots` sections.
 5. Report the title, character count, and shot count to the user.

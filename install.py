@@ -58,7 +58,7 @@ def main():
         result = run(f'"{pip}" install -e .', check=True)
 
     # ---- 创建必要的目录 ----
-    for d in ["logs", "outputs", "OpenManga/assets/audio", "OpenManga/assets/styles"]:
+    for d in ["OpenManga/logs", "OpenManga/outputs", "OpenManga/assets/audio", "OpenManga/assets/styles"]:
         (ROOT / d).mkdir(parents=True, exist_ok=True)
 
     # ---- 验证安装 ----
@@ -96,7 +96,7 @@ def main():
     print(f"  {python} OpenManga/pipeline/screenwriter.py generate \\")
     print(f"      --idea '雨夜天台，最后一场告别' \\")
     print(f"      --style '赛博朋克' \\")
-    print(f"      --output outputs/my_project/screenplay.json")
+    print(f"      --output OpenManga/outputs/my_project/screenplay.json")
     print(f"  {python} OpenManga/pipeline/supervisor.py run --project my_project")
     print(f"  {python} OpenManga/pipeline/supervisor.py status --project my_project")
     print()

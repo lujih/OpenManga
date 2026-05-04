@@ -12,7 +12,7 @@ if not st.session_state.project:
     st.warning("请先在项目管理中选择或创建一个项目")
     st.stop()
 
-project_dir = os.path.join("outputs", st.session_state.project)
+project_dir = os.path.join("OpenManga", "outputs", st.session_state.project)
 os.makedirs(project_dir, exist_ok=True)
 screenplay_path = os.path.join(project_dir, "screenplay.json")
 

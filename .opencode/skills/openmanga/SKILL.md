@@ -21,11 +21,11 @@ description: >-
 1. 确定项目名（如用户未提供，用 `my_project`）
 2. 生成剧本：
 ```bash
-.venv/bin/python OpenManga/pipeline/screenwriter.py generate --idea "..." --style "..." --output outputs/<project>/screenplay.json
+.venv/bin/python OpenManga/pipeline/screenwriter.py generate --idea "..." --style "..." --output OpenManga/outputs/<project>/screenplay.json
 ```
-3. 为每个角色生成标准照（如 `assets/characters/<name>/` 不存在）：
+3. 为每个角色生成标准照（如 `OpenManga/assets/characters/<name>/` 不存在）：
 ```bash
-.venv/bin/python OpenManga/pipeline/illustrator.py generate-character --name "..." --appearance "..." --output assets/characters/<name>/
+.venv/bin/python OpenManga/pipeline/illustrator.py generate-character --name "..." --appearance "..." --output OpenManga/assets/characters/<name>/
 ```
 4. 运行全流程：
 ```bash
@@ -45,15 +45,15 @@ description: >-
 ### 生成剧本
 用户只需提供创意和风格。
 ```bash
-.venv/bin/python OpenManga/pipeline/screenwriter.py generate --idea "..." --style "..." --output outputs/<project>/screenplay.json
+.venv/bin/python OpenManga/pipeline/screenwriter.py generate --idea "..." --style "..." --output OpenManga/outputs/<project>/screenplay.json
 ```
 产出：`screenplay.json` + manifest
 
 ### 生成角色标准照
 ```bash
-.venv/bin/python OpenManga/pipeline/illustrator.py generate-character --name "..." --appearance "..." --output assets/characters/<name>/
+.venv/bin/python OpenManga/pipeline/illustrator.py generate-character --name "..." --appearance "..." --output OpenManga/assets/characters/<name>/
 ```
-产出：`assets/characters/<name>/{front,side,quarter,back}.png` + manifest
+产出：`OpenManga/assets/characters/<name>/{front,side,quarter,back}.png` + manifest
 
 ### 运行/续跑管线
 ```bash

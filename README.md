@@ -49,7 +49,7 @@ export ELEVENLABS_API_KEY="..."
 python OpenManga/pipeline/screenwriter.py generate \
     --idea "雨夜天台，最后一场告别" \
     --style "赛博朋克, 电影感" \
-    --output outputs/my_project/screenplay.json
+    --output OpenManga/outputs/my_project/screenplay.json
 
 # 5. 一键生成完整视频
 python OpenManga/pipeline/supervisor.py run --project my_project
@@ -91,14 +91,11 @@ openmanga/
 │   ├── pages/                # Streamlit 页面
 │   ├── tests/                # 测试 (38)
 │   ├── assets/               # 资产库
+│   ├── outputs/              # 项目输出
 │   └── app.py                # Streamlit 入口
-├── scripts/                  # 工具脚本
-│   └── install.py            # 跨平台安装器
-├── logs/                     # 运行时日志
-├── outputs/                  # 项目输出
-├── config.yaml               # 模型配置
-├── app.py                    # [root] Streamlit 快捷入口
-└── README.md
+├── install.py                # 跨平台安装器
+├── pyproject.toml            # 项目元数据
+├── README.md
 ```
 
 ## ⚙️ Provider 配置

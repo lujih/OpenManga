@@ -27,7 +27,7 @@ def prepare_shot(project_dir: str, shot: dict, global_style: str) -> str:
 
     character_ref = None
     if shot.get("character"):
-        char_dir = os.path.join("assets", "characters", shot["character"])
+        char_dir = os.path.join("OpenManga", "assets", "characters", shot["character"])
         front_path = os.path.join(char_dir, "front.png")
         if os.path.exists(front_path):
             character_ref = front_path
@@ -68,7 +68,7 @@ def update_brief_with_keyframe(brief_path: str, project_dir: str, shot_id: int):
 @click.option("--config", default="config.yaml")
 @click.option("--from-step", default="screenplay")
 def run(project, config, from_step):
-    project_dir = os.path.join("outputs", project)
+    project_dir = os.path.join("OpenManga", "outputs", project)
     screenplay_path = os.path.join(project_dir, "screenplay.json")
 
     if not os.path.exists(screenplay_path):

@@ -4,8 +4,8 @@ __pycache__/
 dist/
 .pytest_cache/
 .venv/
-logs/
-outputs/**/*.mp4
-outputs/**/*.wav
-outputs/**/*.png
-outputs/.lock_running
+OpenManga/logs/
+OpenManga/outputs/**/*.mp4
+OpenManga/outputs/**/*.wav
+OpenManga/outputs/**/*.png
+OpenManga/outputs/.lock_running

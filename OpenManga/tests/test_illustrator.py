@@ -59,7 +59,7 @@ def test_generate_shot_creates_manifest(tmp_path, sample_config_path):
     brief_path = os.path.join(shot_dir, "shot_brief.yaml")
     brief = {
         "shot_id": 1, "character": "主角",
-        "character_ref": "assets/characters/主角/standard.png",
+        "character_ref": "OpenManga/assets/characters/主角/standard.png",
         "scene_desc": "安静的室内", "camera": "中景",
         "style": "写实", "dialogue": "你好。", "emotion": "平静",
         "motion": None, "ambient": None, "duration_sec": 3,

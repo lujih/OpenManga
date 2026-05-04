@@ -3,7 +3,7 @@ import streamlit as st
 
 st.title("🏠 项目管理")
 
-outputs_dir = "outputs"
+outputs_dir = "OpenManga/outputs"
 os.makedirs(outputs_dir, exist_ok=True)
 projects = sorted([d for d in os.listdir(outputs_dir) if os.path.isdir(os.path.join(outputs_dir, d))])
 

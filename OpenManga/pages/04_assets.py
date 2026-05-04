@@ -5,7 +5,7 @@ import streamlit as st
 
 st.title("🖼️ 资产库")
 
-characters_dir = "assets/characters"
+characters_dir = "OpenManga/assets/characters"
 os.makedirs(characters_dir, exist_ok=True)
 characters = sorted([d for d in os.listdir(characters_dir) if os.path.isdir(os.path.join(characters_dir, d))])
 
@@ -58,7 +58,7 @@ with tab1:
 
 with tab2:
     st.subheader("配音试听")
-    outputs_dir = "outputs"
+    outputs_dir = "OpenManga/outputs"
     if os.path.exists(outputs_dir):
         for proj in sorted(os.listdir(outputs_dir)):
             proj_path = os.path.join(outputs_dir, proj)

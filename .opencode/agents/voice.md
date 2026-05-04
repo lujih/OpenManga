@@ -15,7 +15,7 @@ For each shot with dialogue, call:
 
 ```bash
 python OpenManga/pipeline/voice.py generate \
-    --input-file outputs/<project>/shot_<NN>/shot_brief.yaml \
+    --input-file OpenManga/outputs/<project>/shot_<NN>/shot_brief.yaml \
     --config config.yaml
 ```
 
