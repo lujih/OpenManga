@@ -3,7 +3,6 @@
 import os
 import subprocess
 import sys
-import shutil
 import platform
 from pathlib import Path
 
@@ -33,33 +32,20 @@ def main():
     print("📥 安装依赖...")
     run(f'"{pip}" install -e ".[dev]"', check=True)
 
-    print("🔧 安装 OpenCode Skills...")
-    skill_targets = [
-        Path.home() / ".opencode" / "skills",
-        Path.home() / ".config" / "opencode" / "skills",
-    ]
-    for sd in [".opencode/skills/openmanga", ".opencode/skills/openmanga-web"]:
-        src = ROOT / sd
-        if src.exists():
-            for tgt in skill_targets:
-                dst = tgt / src.name
-                tgt.mkdir(parents=True, exist_ok=True)
-                if dst.exists():
-                    shutil.rmtree(dst)
-                shutil.copytree(src, dst)
-
     (ROOT / "logs").mkdir(exist_ok=True)
 
-    print("\n✅ 安装完成\n")
-    print("下一步 — 配置 API Key：")
-    print("  export OPENAI_API_KEY=sk-...       # 图像生成")
-    print("  export ANTHROPIC_API_KEY=sk-...    # 剧本（或改 config.yaml 切换提供商）")
-    print("  export ELEVENLABS_API_KEY=...      # 配音（或改 config.yaml 切换到 OpenAI TTS）")
-    print(f"\n启动 Web 面板：")
-    print(f"  {venv / 'bin' / 'streamlit'} run app.py")
-    print(f"\n生成第一集样片：")
-    print(f"  {venv / 'bin' / 'python'} pipeline/screenwriter.py generate --idea '你的创意' --style '写实' --output outputs/my_project/screenplay.json")
     py = str(venv / "bin" / "python")
+    streamlit = str(venv / "bin" / "streamlit")
+
+    print("\n✅ 安装完成\n")
+    print("Skills 和 Agents 已在 .opencode/ 目录，OpenCode 自动发现。")
+    print("\n配置 API Key：")
+    print("  export OPENAI_API_KEY=sk-...")
+    print("  export ANTHROPIC_API_KEY=sk-...")
+    print("  export ELEVENLABS_API_KEY=...")
+    print(f"\n启动 Web 面板：{streamlit} run app.py")
+    print(f"\n生成第一集：")
+    print(f"  {py} pipeline/screenwriter.py generate --idea '你的创意' --style '写实' --output outputs/my_project/screenplay.json")
     print(f"  {py} pipeline/supervisor.py run --project my_project")
 
 

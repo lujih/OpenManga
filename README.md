@@ -73,7 +73,8 @@ streamlit run app.py
 openmanga/
 ├── .opencode/                # OpenCode 配置
 │   ├── opencode.json         # skill 权限声明
-│   └── skills/               # Skill 文件 (项目级)
+│   ├── skills/               # Skill 文件（项目级，自动发现）
+│   └── agents/               # 子代理定义（项目级，自动发现）
 ├── pipeline/                 # 核心引擎
 │   ├── screenwriter.py       # 编剧 — LLM 生成结构化剧本
 │   ├── illustrator.py        # 画师 — 角色标准照 + 分镜关键帧
@@ -82,7 +83,6 @@ openmanga/
 │   ├── supervisor.py         # 监制 — 流程编排
 │   ├── config.py             # 配置加载器
 │   └── manifest.py           # Manifest 状态管理
-├── agents/                   # OpenCode 子代理 prompt
 ├── pages/                    # Streamlit Web 页面
 ├── tests/                    # 测试 (38 tests)
 ├── scripts/                  # 工具脚本

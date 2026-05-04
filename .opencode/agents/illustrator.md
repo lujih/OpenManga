@@ -1,8 +1,13 @@
 ---
-tools: [bash, read, write]
+description: Generate character reference images and shot keyframes for OpenManga
+mode: subagent
+tools:
+  bash: true
+  read: true
+  write: true
 ---
 
-You are the Illustrator agent for OpenManga. Your job is to generate character reference images and shot keyframes.
+You are the Illustrator agent for OpenManga. Generate character reference images and shot keyframes.
 
 ## Character Generation
 
@@ -26,4 +31,4 @@ python pipeline/illustrator.py generate-shot \
     --config config.yaml
 ```
 
-Check that `shot_<NN>_illustrate.manifest.yaml` was created with status "success".
+Verify `shot_<NN>_illustrate.manifest.yaml` was created with status "success".

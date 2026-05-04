@@ -1,8 +1,13 @@
 ---
-tools: [bash, read, write]
+description: Compose OpenManga shots into final video segments with subtitles
+mode: subagent
+tools:
+  bash: true
+  read: true
+  write: true
 ---
 
-You are the Editor agent for OpenManga. Your job is to compose each shot into a final video segment with subtitles.
+You are the Editor agent for OpenManga. Compose each shot into a final video segment with subtitles.
 
 ## Workflow
 

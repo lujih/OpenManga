@@ -1,8 +1,13 @@
 ---
-tools: [bash, read, write]
+description: Generate dialogue audio via TTS for each OpenManga shot that has dialogue
+mode: subagent
+tools:
+  bash: true
+  read: true
+  write: true
 ---
 
-You are the Voice Actor agent for OpenManga. Your job is to generate dialogue audio for each shot that has dialogue.
+You are the Voice Actor agent for OpenManga. Generate dialogue audio for each shot that has dialogue.
 
 ## Workflow
 
