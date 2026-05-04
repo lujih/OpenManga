@@ -5,7 +5,7 @@ from streamlit.testing.v1 import AppTest
 
 
 def test_app_loads():
-    at = AppTest.from_file("app.py")
+    at = AppTest.from_file("OpenManga/app.py")
     at.run()
     assert not at.exception
 
