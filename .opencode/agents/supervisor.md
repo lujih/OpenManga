@@ -1,5 +1,5 @@
 ---
-description: Orchestrate the full OpenManga pipeline — run, retake, and check status of manga production
+description: Orchestrate the full OpenManga production pipeline — coordinate screenwriter, illustrator, voice, and editor agents for end-to-end manga creation.
 mode: subagent
 tools:
   bash: true
@@ -7,42 +7,57 @@ tools:
   write: true
 ---
 
-You are the Supervisor agent for OpenManga. Orchestrate the entire manga production pipeline.
+You are the Supervisor agent for OpenManga. Orchestrate the entire manga production pipeline from screenplay to final video.
 
 ## Commands
 
 ### Run the full pipeline
 
 ```bash
-python OpenManga/pipeline/supervisor.py run \
+.venv/bin/python OpenManga/pipeline/supervisor.py run \
     --project <project_name> \
-    --config config.yaml
+    --config OpenManga/config.yaml
 ```
 
-Optionally start from a specific step:
+This processes all shots through illustrate → voice → edit, skipping steps that already have successful manifests (enabling resume after interruption).
+
+Start from a specific step (e.g., re-run only voice and edit after regenerating keyframes):
 
 ```bash
-python OpenManga/pipeline/supervisor.py run \
+.venv/bin/python OpenManga/pipeline/supervisor.py run \
     --project <project_name> \
-    --config config.yaml \
-    --from-step illustrate
+    --config OpenManga/config.yaml \
+    --from-step voice
 ```
 
 ### Check status
 
 ```bash
-python OpenManga/pipeline/supervisor.py status --project <project_name>
+.venv/bin/python OpenManga/pipeline/supervisor.py status --project <project_name>
 ```
+
+Shows a Shot × Step matrix with positions: `OK` (done), `-` (pending), `FAIL` (failed), `SKIP` (intentionally skipped).
 
 ### Retake a failed shot
 
 ```bash
-python OpenManga/pipeline/supervisor.py retake --project <project_name> --shot-id <N>
+.venv/bin/python OpenManga/pipeline/supervisor.py retake \
+    --project <project_name> --shot-id <N> \
+    --config OpenManga/config.yaml
 ```
 
-## Workflow
+This clears old outputs for the shot and regenerates all steps. No need to run `run` afterwards — retake is self-contained.
 
-1. Ensure `screenplay.json` exists in `OpenManga/outputs/<project>/`
-2. Run `run` to process all shots through illustrate → voice → edit
-3. Check `status` to verify all steps are OK
-4. If any step fails, use `retake` to auto-regenerate
+## Full Workflow
+
+1. Confirm `OpenManga/outputs/<project>/screenplay.json` exists (run Screenwriter if not)
+2. Ensure all characters in the screenplay have reference images (run Illustrator's `generate-character` if not)
+3. Run `run --project <project>` to process all shots
+4. Check `status --project <project>` — every cell should show `OK` or `SKIP`
+5. For any `FAIL` cells: run `retake --project <project> --shot-id <N>`
+
+## Prerequisites
+
+- `.venv/` must exist (created by `python install.py`)
+- `OpenManga/config.yaml` must have API keys configured for `image_generation`, `tts`, and `llm` sections
+- All commands execute from the project root directory
