@@ -2,39 +2,39 @@ image_generation:
   provider: openai
   model: gpt-image-2
   api_key: ${OPENAI_API_KEY}
-  api_base: ""
+  api_base: ''
   params:
     n: 1
-    size: "1024x1024"
-
+    size: 1024x1024
 video_generation:
   provider: seedance
   model: seedance-v1
   api_key: ${SEEDANCE_API_KEY}
-  api_base: ""
+  api_base: ''
   params: {}
-
 tts:
   provider: elevenlabs
   model: eleven_turbo_v2
   api_key: ${ELEVENLABS_API_KEY}
-  api_base: ""
+  api_base: ''
   params:
-    voice_id: "JBFqnCBsd6RMkjVDRZzb"
-    output_format: "mp3_44100_128"
-
+    voice_id: JBFqnCBsd6RMkjVDRZzb
+    output_format: mp3_44100_128
 llm:
-  provider: anthropic
-  model: claude-sonnet-4-20250514
-  api_key: ${ANTHROPIC_API_KEY}
-  api_base: ""
+  provider: openai
+  model: opencode/big-pickle
+  api_key: sk-n4JggOkEhVBj4wfLfwuhIoxPj06sOw0lLUakedaALlUShhLxs8QlEMmp2SX9Bhyi
+  api_base: https://opencode.ai/zen/v1/chat/completions
   params:
     max_tokens: 4096
-
 editor:
   params:
-    video_size: [1024, 1024]
+    video_size: '[1024, 1024]'
     fps: 24
-    codec: "libx264"
-    audio_codec: "aac"
+    codec: libx264
+    audio_codec: aac
     font_size: 48
+  api_base: ''
+  provider: ''
+  model: ''
+  api_key: ''

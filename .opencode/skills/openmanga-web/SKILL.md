@@ -16,7 +16,7 @@ description: >-
 ```bash
 cd /home/cszx/workspace/OpenManga
 pkill -f "streamlit run" 2>/dev/null || true
-nohup .venv/bin/streamlit run app.py --server.port 8501 --server.headless true --browser.gatherUsageStats false > /tmp/streamlit.log 2>&1 &
+nohup .venv/bin/streamlit run app.py --server.port 8501 --server.headless true --browser.gatherUsageStats false > logs/streamlit.log 2>&1 &
 sleep 3
 ```
 

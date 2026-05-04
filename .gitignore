@@ -4,6 +4,8 @@ __pycache__/
 dist/
 .pytest_cache/
 .venv/
-*.mp4
-*.wav
-*.png
+logs/
+outputs/**/*.mp4
+outputs/**/*.wav
+outputs/**/*.png
+outputs/.lock_running
