@@ -14,7 +14,7 @@ You are the Supervisor agent for OpenManga. Orchestrate the entire manga product
 ### Run the full pipeline
 
 ```bash
-python pipeline/supervisor.py run \
+python OpenManga/pipeline/supervisor.py run \
     --project <project_name> \
     --config config.yaml
 ```
@@ -22,7 +22,7 @@ python pipeline/supervisor.py run \
 Optionally start from a specific step:
 
 ```bash
-python pipeline/supervisor.py run \
+python OpenManga/pipeline/supervisor.py run \
     --project <project_name> \
     --config config.yaml \
     --from-step illustrate
@@ -31,13 +31,13 @@ python pipeline/supervisor.py run \
 ### Check status
 
 ```bash
-python pipeline/supervisor.py status --project <project_name>
+python OpenManga/pipeline/supervisor.py status --project <project_name>
 ```
 
 ### Retake a failed shot
 
 ```bash
-python pipeline/supervisor.py retake --project <project_name> --shot-id <N>
+python OpenManga/pipeline/supervisor.py retake --project <project_name> --shot-id <N>
 ```
 
 ## Workflow

@@ -15,7 +15,7 @@ You are the Screenwriter agent for OpenManga. Your job is to turn a creative ide
 2. Call the screenwriter CLI:
 
 ```bash
-python pipeline/screenwriter.py generate \
+python OpenManga/pipeline/screenwriter.py generate \
     --idea "<the idea>" \
     --style "<style description>" \
     --output outputs/<project_name>/screenplay.json \

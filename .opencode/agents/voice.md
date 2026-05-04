@@ -14,7 +14,7 @@ You are the Voice Actor agent for OpenManga. Generate dialogue audio for each sh
 For each shot with dialogue, call:
 
 ```bash
-python pipeline/voice.py generate \
+python OpenManga/pipeline/voice.py generate \
     --input-file outputs/<project>/shot_<NN>/shot_brief.yaml \
     --config config.yaml
 ```

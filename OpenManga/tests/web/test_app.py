@@ -11,7 +11,7 @@ def test_app_loads():
 
 
 def test_dashboard_requires_project():
-    at = AppTest.from_file("pages/03_dashboard.py")
+    at = AppTest.from_file("OpenManga/pages/03_dashboard.py")
     at.run()
     assert at.exception
 
@@ -22,7 +22,7 @@ def test_dashboard_shows_screenplay_warning(tmp_path):
     if os.path.exists(screenplay_path):
         os.remove(screenplay_path)
 
-    at = AppTest.from_file("pages/03_dashboard.py")
+    at = AppTest.from_file("OpenManga/pages/03_dashboard.py")
     at.session_state["project"] = "test_proj"
     at.run()
     assert not at.exception
@@ -46,7 +46,7 @@ def test_dashboard_loads_with_screenplay(tmp_path):
     with open(os.path.join(project_dir, "screenplay.json"), "w") as f:
         json.dump(screenplay, f)
 
-    at = AppTest.from_file("pages/03_dashboard.py")
+    at = AppTest.from_file("OpenManga/pages/03_dashboard.py")
     at.session_state["project"] = "test_proj"
     at.run()
     assert not at.exception

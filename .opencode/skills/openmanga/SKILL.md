@@ -21,23 +21,23 @@ description: >-
 1. 确定项目名（如用户未提供，用 `my_project`）
 2. 生成剧本：
 ```bash
-.venv/bin/python pipeline/screenwriter.py generate --idea "..." --style "..." --output outputs/<project>/screenplay.json
+.venv/bin/python OpenManga/pipeline/screenwriter.py generate --idea "..." --style "..." --output outputs/<project>/screenplay.json
 ```
 3. 为每个角色生成标准照（如 `assets/characters/<name>/` 不存在）：
 ```bash
-.venv/bin/python pipeline/illustrator.py generate-character --name "..." --appearance "..." --output assets/characters/<name>/
+.venv/bin/python OpenManga/pipeline/illustrator.py generate-character --name "..." --appearance "..." --output assets/characters/<name>/
 ```
 4. 运行全流程：
 ```bash
-.venv/bin/python pipeline/supervisor.py run --project <project>
+.venv/bin/python OpenManga/pipeline/supervisor.py run --project <project>
 ```
 5. 检查状态：
 ```bash
-.venv/bin/python pipeline/supervisor.py status --project <project>
+.venv/bin/python OpenManga/pipeline/supervisor.py status --project <project>
 ```
 6. 如有失败镜头，重拍（自动清理+重生成）：
 ```bash
-.venv/bin/python pipeline/supervisor.py retake --project <project> --shot-id N
+.venv/bin/python OpenManga/pipeline/supervisor.py retake --project <project> --shot-id N
 ```
 
 ## 单步操作
@@ -45,25 +45,25 @@ description: >-
 ### 生成剧本
 用户只需提供创意和风格。
 ```bash
-.venv/bin/python pipeline/screenwriter.py generate --idea "..." --style "..." --output outputs/<project>/screenplay.json
+.venv/bin/python OpenManga/pipeline/screenwriter.py generate --idea "..." --style "..." --output outputs/<project>/screenplay.json
 ```
 产出：`screenplay.json` + manifest
 
 ### 生成角色标准照
 ```bash
-.venv/bin/python pipeline/illustrator.py generate-character --name "..." --appearance "..." --output assets/characters/<name>/
+.venv/bin/python OpenManga/pipeline/illustrator.py generate-character --name "..." --appearance "..." --output assets/characters/<name>/
 ```
 产出：`assets/characters/<name>/{front,side,quarter,back}.png` + manifest
 
 ### 运行/续跑管线
 ```bash
-.venv/bin/python pipeline/supervisor.py run --project <project>
+.venv/bin/python OpenManga/pipeline/supervisor.py run --project <project>
 ```
 自动跳过已完成的步骤，只补跑缺失步骤。
 
 ### 查看状态
 ```bash
-.venv/bin/python pipeline/supervisor.py status --project <project>
+.venv/bin/python OpenManga/pipeline/supervisor.py status --project <project>
 ```
 
 ## 约束

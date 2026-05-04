@@ -72,24 +72,29 @@ streamlit run app.py
 ```
 openmanga/
 ├── .opencode/                # OpenCode 配置
-│   ├── opencode.json         # skill 权限声明
-│   ├── skills/               # Skill 文件（项目级，自动发现）
-│   └── agents/               # 子代理定义（项目级，自动发现）
-├── pipeline/                 # 核心引擎
-│   ├── screenwriter.py       # 编剧 — LLM 生成结构化剧本
-│   ├── illustrator.py        # 画师 — 角色标准照 + 分镜关键帧
-│   ├── voice.py              # 配音师 — TTS 对白生成
-│   ├── editor.py             # 剪辑师 — 合成视频 + 字幕
-│   ├── supervisor.py         # 监制 — 流程编排
-│   ├── config.py             # 配置加载器
-│   └── manifest.py           # Manifest 状态管理
-├── pages/                    # Streamlit Web 页面
-├── tests/                    # 测试 (38 tests)
+│   ├── opencode.json
+│   ├── skills/               # Skill 文件
+│   └── agents/               # 子代理定义
+├── OpenManga/                # 源码包
+│   ├── pipeline/             # 核心引擎
+│   │   ├── screenwriter.py   # 编剧 — LLM 生成剧本
+│   │   ├── illustrator.py    # 画师 — 角色 + 关键帧
+│   │   ├── voice.py          # 配音师 — TTS 对白
+│   │   ├── editor.py         # 剪辑师 — 合成 + 字幕
+│   │   ├── supervisor.py     # 监制 — 流程编排
+│   │   ├── config.py         # 配置加载
+│   │   └── manifest.py       # 状态管理
+│   ├── pages/                # Streamlit 页面
+│   ├── tests/                # 测试 (38)
+│   ├── assets/               # 资产库
+│   └── app.py                # Streamlit 入口
 ├── scripts/                  # 工具脚本
 │   └── install.py            # 跨平台安装器
-├── app.py                    # Streamlit 入口
+├── logs/                     # 运行时日志
+├── outputs/                  # 项目输出
 ├── config.yaml               # 模型配置
-└── outputs/                  # 项目输出
+├── app.py                    # [root] Streamlit 快捷入口
+└── README.md
 ```
 
 ## ⚙️ Provider 配置

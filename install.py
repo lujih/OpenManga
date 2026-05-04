@@ -45,8 +45,8 @@ def main():
     print("  export ELEVENLABS_API_KEY=...")
     print(f"\n启动 Web 面板：{streamlit} run app.py")
     print(f"\n生成第一集：")
-    print(f"  {py} pipeline/screenwriter.py generate --idea '你的创意' --style '写实' --output outputs/my_project/screenplay.json")
-    print(f"  {py} pipeline/supervisor.py run --project my_project")
+    print(f"  {py} OpenManga/pipeline/screenwriter.py generate --idea '你的创意' --style '写实' --output outputs/my_project/screenplay.json")
+    print(f"  {py} OpenManga/pipeline/supervisor.py run --project my_project")
 
 
 if __name__ == "__main__":

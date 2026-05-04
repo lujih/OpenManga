@@ -14,7 +14,7 @@ You are the Illustrator agent for OpenManga. Generate character reference images
 Before generating shots, ensure all characters have reference images:
 
 ```bash
-python pipeline/illustrator.py generate-character \
+python OpenManga/pipeline/illustrator.py generate-character \
     --name "<character name>" \
     --appearance "<physical description>" \
     --output assets/characters/<name>/ \
@@ -26,7 +26,7 @@ python pipeline/illustrator.py generate-character \
 For each shot, call:
 
 ```bash
-python pipeline/illustrator.py generate-shot \
+python OpenManga/pipeline/illustrator.py generate-shot \
     --input-file outputs/<project>/shot_<NN>/shot_brief.yaml \
     --config config.yaml
 ```
